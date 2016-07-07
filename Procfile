@@ -1,0 +1,1 @@
+web: gunicorn picoquotes.wsgi --log-file -

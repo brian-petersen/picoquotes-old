@@ -3,5 +3,5 @@
 .env
 *.log
 
-picoquotes/static/
+picoquotes/staticfiles/
 picoquotes/settings/local.py

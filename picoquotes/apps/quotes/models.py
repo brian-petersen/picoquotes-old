@@ -26,3 +26,6 @@ class Quote(TimeStampedModel):
 
     def __str__(self):
         return '{} ({})'.format(self.text, self.author.name)
+
+    class Meta():
+        ordering = ['-created']

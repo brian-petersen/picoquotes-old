@@ -5,3 +5,7 @@
 
 picoquotes/staticfiles/
 picoquotes/settings/local.py
+
+__pycache__/
+*.py[cod]
+*$py.class

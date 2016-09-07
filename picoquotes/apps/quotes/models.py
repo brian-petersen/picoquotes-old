@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils.text import Truncator
 
 from django_extensions.db.fields import AutoSlugField
@@ -22,8 +23,16 @@ class Author(models.Model):
 
 class Quote(TimeStampedModel):
     text = models.TextField()
-    author = models.ForeignKey(Author, on_delete=models.SET_DEFAULT,
-                               default=Author.get_default)
+    author = models.ForeignKey(
+        Author,
+        on_delete=models.SET_DEFAULT,
+        default=Author.get_default,
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name='quotes',
+    )
 
     def __str__(self):
         text = Truncator(self.text).words(20)

@@ -22,5 +22,5 @@ class FilterQuoteList(ListView):
             if param == 'user':
                 filters['user'] = get_object_or_404(User, username=value)
             if param == 'query':
-                filters['text__contains'] = value
+                filters['text__icontains'] = value
         return Quote.objects.filter(**filters)

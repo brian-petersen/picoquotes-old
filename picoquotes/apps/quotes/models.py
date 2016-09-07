@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import Truncator
 
 from django_extensions.db.fields import AutoSlugField
 from model_utils.models import TimeStampedModel
@@ -25,7 +26,8 @@ class Quote(TimeStampedModel):
                                default=Author.get_default)
 
     def __str__(self):
-        return '{} ({})'.format(self.text, self.author.name)
+        text = Truncator(self.text).words(20)
+        return '"{}" {}'.format(text, self.author.name)
 
     class Meta():
         ordering = ['-created']

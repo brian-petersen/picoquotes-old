@@ -1,0 +1,5 @@
+<li class="quote">
+    <p>{{ quote.text }}</p>
+    <a class="author" href="{% url 'author-list' quote.author.slug %}">{{ quote.author.name }}</a>
+    <div class="clear"></div>
+</li>

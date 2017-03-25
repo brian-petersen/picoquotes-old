@@ -1,0 +1,10 @@
+{% extends '_base.html' %}
+
+{% block content %}
+{# {% include 'quotes/_quotes.html' with quotes=object_list %} #}
+<ul class="quotes">
+    {# {% for quote in object_list %} #}
+    {% include 'quotes/_quote.html' with quote=object %}
+    {# {% endfor %} #}
+</ul>
+{% endblock %}

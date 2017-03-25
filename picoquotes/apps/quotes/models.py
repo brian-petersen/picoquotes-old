@@ -32,6 +32,7 @@ class Quote(TimeStampedModel):
         User,
         on_delete=models.PROTECT,
         related_name='quotes',
+        default=1,
     )
 
     def __str__(self):

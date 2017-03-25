@@ -22,8 +22,21 @@
     <body>
         <header>
             <div class="container">
-                <a class="logo" href="/">PicoQuotes</a>
-                {# TODO add filter options #}
+                <div class="logo-wrap">
+                        <a class="logo" href="/">PicoQuotes</a>
+                    <ul class="menu">
+                        <li>
+                            <a href="{% url 'random-quote' %}">Random</a>
+                        </li>
+                        <li>
+                            <a class="open-search" href="{% url 'search' %}">Search</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="search-wrap">
+                    <input type="search" name="search" id="search" data-search-url="{% url 'search' %}" placeholder="Search..." />
+                    <a class="close-search" href="#close">&#10006;</a>
+                </div>
             </div>
         </header>
         <div class="container">
@@ -31,6 +44,7 @@
         </div>
 
         {% block javascript %}
+        <script src="{% static 'js/jquery.js' %}"></script>
         <script src="{% static 'js/scripts.js' %}"></script>
         {% endblock javascript %}
     </body>

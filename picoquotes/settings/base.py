@@ -2,6 +2,7 @@ import sys
 
 import environ
 
+
 # General configuration
 # ======================================================
 root = environ.Path(__file__) - 2
@@ -20,6 +21,7 @@ IN_TESTING = sys.argv[1:2] == ['test']
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')
 
+
 # Application definition
 # ======================================================
 INSTALLED_APPS = [
@@ -28,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',  # use whitenoise in development
     'django.contrib.staticfiles'
 ]
 
@@ -44,6 +47,7 @@ INSTALLED_APPS += PROJECT_APPS
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # use whitenoise for assets
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -58,11 +62,13 @@ ROOT_URLCONF = 'picoquotes.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'picoquotes.wsgi.application'
 
+
 # Database
 # ======================================================
 DATABASES = {
     'default': env.db()
 }
+
 
 # Internationalization
 # ======================================================
@@ -75,6 +81,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
 
 # Static files (CSS, JavaScript, Images)
 # ======================================================
@@ -108,7 +115,8 @@ TEMPLATES = [
     }
 ]
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Password validation
 # ======================================================
@@ -127,9 +135,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Local configs
 # ======================================================
-
 # .local.py overrides all the common settings.
 try:
     from .local import *  # noqa
